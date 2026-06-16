@@ -1,0 +1,67 @@
+export const profile = {
+  name: "Oğuzhan Kapukaya",
+  title: "Araştırma Görevlisi",
+  department: "Elektrik ve Elektronik Mühendisliği",
+  university: "İstanbul Teknik Üniversitesi",
+  email: "kapukaya@itu.edu.tr",
+  office: "Elektrik-Elektronik Fakültesi, Oda 301",
+  officeHours: "Salı 14:00–16:00, Perşembe 10:00–12:00",
+  phone: "+90 212 293 13 00",
+  shortBio:
+    "Elektrik ve Elektronik Mühendisliği alanında araştırma görevlisi olarak çalışmaktayım. Güç elektroniği, gömülü sistemler ve sinyal işleme konularında araştırmalar yürütüyor, lisans öğrencilerine ders vermekteyim.",
+  bio: `İstanbul Teknik Üniversitesi Elektrik ve Elektronik Mühendisliği bölümünde araştırma görevlisi olarak görev yapmaktayım.
+
+Lisans eğitimimi 2018 yılında İTÜ EEF'te tamamladıktan sonra, aynı bölümde yüksek lisans (2020) ve ardından doktora çalışmalarıma başladım. Araştırmalarım ağırlıklı olarak güç elektroniği, gömülü sistemler, FPGA tabanlı uygulamalar ve dijital sinyal işleme alanlarında yoğunlaşmaktadır.
+
+Akademik çalışmalarımın yanı sıra Devre Analizi, Elektronik Devreler, Sinyaller ve Sistemler, Sayısal Tasarım ve Mikrodenetleyiciler derslerini yürütmekteyim. Öğrencilerin hem teorik temelleri sağlam öğrenmesi hem de uygulamalı deneyim kazanması için çaba göstermekteyim.`,
+  education: [
+    {
+      degree: "Doktora (Devam Ediyor)",
+      field: "Elektrik ve Elektronik Mühendisliği",
+      university: "İstanbul Teknik Üniversitesi",
+      year: "2021 – Devam ediyor",
+    },
+    {
+      degree: "Yüksek Lisans",
+      field: "Elektrik ve Elektronik Mühendisliği",
+      university: "İstanbul Teknik Üniversitesi",
+      year: "2018 – 2020",
+    },
+    {
+      degree: "Lisans",
+      field: "Elektrik ve Elektronik Mühendisliği",
+      university: "İstanbul Teknik Üniversitesi",
+      year: "2014 – 2018",
+    },
+  ],
+  skills: [
+    "MATLAB / Simulink",
+    "VHDL / Verilog",
+    "FPGA Tasarımı",
+    "STM32 / Arduino",
+    "Python",
+    "C/C++",
+    "LTspice",
+    "Multisim",
+    "LabVIEW",
+    "LaTeX",
+  ],
+  languages: [
+    { name: "Türkçe", level: "Anadil" },
+    { name: "İngilizce", level: "İleri (C1)" },
+    { name: "Almanca", level: "Başlangıç (A2)" },
+  ],
+  social: {
+    googleScholar: "https://scholar.google.com",
+    researchGate: "https://www.researchgate.net",
+    linkedin: "https://www.linkedin.com",
+    github: "https://github.com",
+    orcid: "https://orcid.org/0000-0000-0000-0000",
+  },
+  stats: {
+    publications: 12,
+    courses: 5,
+    students: 200,
+    yearsExperience: 6,
+  },
+};
