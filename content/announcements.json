@@ -1,5 +1,13 @@
 [
   {
+    "id": "ann-1781788890478",
+    "title": "test123",
+    "content": "testetetstst",
+    "date": "2026-06-18",
+    "relatedCourse": null,
+    "important": true
+  },
+  {
     "id": "ann-001",
     "title": "Devre Analizi Ara Sınav Tarihi Açıklandı",
     "content": "Devre Analizi (EEF 201) dersi ara sınavı 8 Kasım 2024 Cuma günü saat 10:00'da D-203 amfisinde yapılacaktır. Sınav kapsamı: Hafta 1–7 arası konular. Çoklu soru (30%) + problemler (70%). Yanınızda hesap makinesi ve öğrenci kimliği bulundurunuz.",
