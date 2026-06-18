@@ -1,4 +1,4 @@
-import { uploadBinaryFile } from "@/lib/github";
+import { uploadBinaryFile, getFileContent, updateFile } from "@/lib/github";
 
 export const dynamic = "force-dynamic";
 
@@ -8,6 +8,8 @@ const ALLOWED_MIME_TYPES = [
   "application/pdf",
   "application/vnd.openxmlformats-officedocument.presentationml.presentation",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/zip",
+  "application/x-zip-compressed",
   "image/png",
   "image/jpeg",
 ];
@@ -33,6 +35,9 @@ export async function POST(request: Request) {
     const targetPath = formData.get("targetPath") as string | null;
     const commitMessage = formData.get("commitMessage") as string | null;
 
+    // Optional: material metadata for auto-updating materials.json
+    const materialMeta = formData.get("materialMeta") as string | null;
+
     if (!file) {
       return Response.json({ error: "Dosya seçilmedi" }, { status: 400 });
     }
@@ -48,7 +53,7 @@ export async function POST(request: Request) {
     if (!ALLOWED_MIME_TYPES.includes(file.type)) {
       return Response.json(
         {
-          error: `Desteklenmeyen dosya türü: ${file.type}. İzin verilen türler: PDF, PPTX, DOCX, PNG, JPEG`,
+          error: `Desteklenmeyen dosya türü: ${file.type}. İzin verilen türler: PDF, PPTX, DOCX, ZIP, PNG, JPEG`,
         },
         { status: 400 }
       );
@@ -84,17 +89,48 @@ export async function POST(request: Request) {
     const base64 = Buffer.from(arrayBuffer).toString("base64");
 
     // Upload to GitHub
-    const message =
-      commitMessage || `Add file: ${originalName}`;
-
+    const message = commitMessage || `Dosya eklendi: ${originalName}`;
     await uploadBinaryFile(fullPath, base64, message);
 
     // Return the public URL
     const publicUrl = `/${fullPath.replace(/^public\//, "")}`;
 
+    // Auto-update materials.json if materialMeta is provided
+    if (materialMeta) {
+      try {
+        const meta = JSON.parse(materialMeta);
+        const { content: rawContent, sha } = await getFileContent("content/materials.json");
+        const materials = JSON.parse(rawContent);
+
+        const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
+        const newMaterial = {
+          id: `mat-${timestamp}`,
+          courseSlug: meta.courseSlug || "",
+          title: meta.title || originalName,
+          description: meta.description || "",
+          week: meta.week ? Number(meta.week) : null,
+          type: meta.type || "kaynak",
+          fileUrl: publicUrl,
+          fileSize: `${sizeMB} MB`,
+          uploadedAt: new Date().toISOString().split("T")[0],
+        };
+
+        materials.push(newMaterial);
+        await updateFile(
+          "content/materials.json",
+          JSON.stringify(materials, null, 2),
+          `Materyal eklendi: ${newMaterial.title}`,
+          sha
+        );
+      } catch (metaErr) {
+        // File uploaded successfully but materials.json update failed
+        console.error("materials.json güncelleme hatası:", metaErr);
+      }
+    }
+
     return Response.json({
       success: true,
-      message: `Dosya başarıyla yüklendi ve GitHub'a kaydedildi. Vercel deploy birkaç dakika içinde tamamlanacak.`,
+      message: `Dosya başarıyla yüklendi ve GitHub'a kaydedildi.`,
       fileName,
       filePath: fullPath,
       publicUrl,

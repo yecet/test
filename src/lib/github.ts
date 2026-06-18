@@ -11,7 +11,7 @@ function getConfig() {
 
   if (!token || !owner || !repo) {
     throw new Error(
-      "GitHub yapılandırması eksik. GITHUB_TOKEN, GITHUB_OWNER ve GITHUB_REPO ayarlayın."
+      "GitHub yapılandırması eksik. GITHUB_TOKEN, GITHUB_OWNER ve GITHUB_REPO ortam değişkenlerini ayarlayın."
     );
   }
 
@@ -20,13 +20,17 @@ function getConfig() {
 
 function headers() {
   const { token } = getConfig();
+  // Classic PAT tokens start with ghp_, fine-grained with github_pat_
+  // Classic PAT requires "token" prefix, fine-grained accepts "Bearer"
+  const prefix = token.startsWith("ghp_") ? "token" : "Bearer";
   return {
-    Authorization: `Bearer ${token}`,
+    Authorization: `${prefix} ${token}`,
     Accept: "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
     "Content-Type": "application/json",
   };
 }
+
 
 // ---- Get file content & SHA ----
 export async function getFileContent(

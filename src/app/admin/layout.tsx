@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import AdminShell from "@/components/admin/AdminShell";
+import { ToastProvider } from "@/components/admin/AdminUI";
 
 export const metadata: Metadata = {
-  title: "Admin Panel | Oğuzhan Kapukaya",
+  title: "Yönetim Paneli | Oğuzhan Kapukaya",
   robots: { index: false, follow: false },
 };
 
@@ -11,8 +13,8 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ minHeight: "100vh", background: "#0f172a" }}>
-      {children}
-    </div>
+    <ToastProvider>
+      <AdminShell>{children}</AdminShell>
+    </ToastProvider>
   );
 }
