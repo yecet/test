@@ -2,7 +2,7 @@
   "name": "Oğuzhan Kapukaya",
   "title": "Araştırma Görevlisi",
   "department": "Elektrik ve Elektronik Mühendisliği",
-  "university": "İstanbul Teknik Üniversitesi",
+  "university": "Kahramanmaraş Sütçü İmam Üniversitesi",
   "email": "kapukaya@itu.edu.tr",
   "office": "Elektrik-Elektronik Fakültesi, Oda 301",
   "officeHours": "Salı 14:00–16:00, Perşembe 10:00–12:00",
@@ -42,9 +42,18 @@
     "LaTeX"
   ],
   "languages": [
-    { "name": "Türkçe", "level": "Anadil" },
-    { "name": "İngilizce", "level": "İleri (C1)" },
-    { "name": "Almanca", "level": "Başlangıç (A2)" }
+    {
+      "name": "Türkçe",
+      "level": "Anadil"
+    },
+    {
+      "name": "İngilizce",
+      "level": "İleri (C1)"
+    },
+    {
+      "name": "Almanca",
+      "level": "Başlangıç (A2)"
+    }
   ],
   "social": {
     "googleScholar": "https://scholar.google.com",
