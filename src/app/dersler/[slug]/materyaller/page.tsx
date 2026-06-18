@@ -4,8 +4,10 @@ import { use } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useState, useMemo } from "react";
-import { courses } from "@/data/courses";
-import { materials, type MaterialType } from "@/data/materials";
+import type { MaterialType } from "@/lib/types";
+
+import coursesData from "../../../../../content/courses.json";
+import materialsData from "../../../../../content/materials.json";
 
 const TYPE_LABELS: Record<MaterialType, string> = {
   slayt: "Slayt",
@@ -31,6 +33,8 @@ export default function MateryallerPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
+  const courses = coursesData;
+  const materials = materialsData as { id: string; courseSlug: string; title: string; description: string; week: number | null; type: MaterialType; fileUrl: string; fileSize: string; uploadedAt: string }[];
   const course = courses.find((c) => c.slug === slug);
 
   if (!course) notFound();

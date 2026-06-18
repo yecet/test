@@ -1,0 +1,66 @@
+[
+  {
+    "id": "ann-001",
+    "title": "Devre Analizi Ara Sınav Tarihi Açıklandı",
+    "content": "Devre Analizi (EEF 201) dersi ara sınavı 8 Kasım 2024 Cuma günü saat 10:00'da D-203 amfisinde yapılacaktır. Sınav kapsamı: Hafta 1–7 arası konular. Çoklu soru (30%) + problemler (70%). Yanınızda hesap makinesi ve öğrenci kimliği bulundurunuz.",
+    "date": "2024-10-28",
+    "relatedCourse": "devre-analizi",
+    "important": true
+  },
+  {
+    "id": "ann-002",
+    "title": "Elektronik Devreler Lab Föyleri Güncellendi",
+    "content": "Elektronik Devreler (EEF 301) dersi laboratuvar föyleri güncellenmiştir. Yeni föyler Ders Materyalleri sayfasından indirilebilir. Lütfen eski sürümleri kullanmayınız.",
+    "date": "2024-10-21",
+    "relatedCourse": "elektronik-devreler",
+    "important": false
+  },
+  {
+    "id": "ann-003",
+    "title": "Ofis Saati Değişikliği – Kasım 2024",
+    "content": "Kasım ayı boyunca Salı günkü ofis saatlerim 14:00–15:30 arasında olacaktır (16:00'a kadar değil). Perşembe saatleri aynı kalmaktadır (10:00–12:00). Ayrıca e-posta ile soru sormaya devam edebilirsiniz.",
+    "date": "2024-10-28",
+    "relatedCourse": null,
+    "important": false
+  },
+  {
+    "id": "ann-004",
+    "title": "Sayısal Tasarım Projesi Konuları Duyuruldu",
+    "content": "Sayısal Tasarım (EEF 211) dersi dönem sonu projesinde tasarlanacak konular açıklanmıştır. Gruplar en geç 15 Kasım'a kadar konu seçimini yapmalı ve grup listesini e-posta ile iletmelidir. Proje sunumları 13–14. haftada yapılacaktır.",
+    "date": "2024-11-04",
+    "relatedCourse": "sayisal-tasarim",
+    "important": true
+  },
+  {
+    "id": "ann-005",
+    "title": "Sinyaller ve Sistemler Ödev 2 Son Tarihi",
+    "content": "Sinyaller ve Sistemler (EEF 302) dersinin 2. ödevinin teslim tarihi 3 Mart 2025 Pazartesi günü saat 17:00'dir. Ödevler fiziksel olarak bölüm sekreterliğine teslim edilecektir. Geç teslim durumunda 2 gün tolerans verilmekte, her gün için 10 puan düşürülmektedir.",
+    "date": "2025-02-24",
+    "relatedCourse": "sinyaller-ve-sistemler",
+    "important": true
+  },
+  {
+    "id": "ann-006",
+    "title": "Mikrodenetleyiciler Lab Kitlerinin Teslimi",
+    "content": "Mikrodenetleyiciler (EEF 401) dersi öğrencileri için STM32 Nucleo kit ödünç verme işlemleri başlamıştır. Kiti almak için bölüm laboratuvarına kimliğinizle başvurunuz.",
+    "date": "2025-02-10",
+    "relatedCourse": "mikrodenetleyiciler",
+    "important": false
+  },
+  {
+    "id": "ann-007",
+    "title": "Akademik Takvim Güncellemesi",
+    "content": "Üniversite akademik takviminde yapılan güncellemeye göre 23 Nisan Ulusal Egemenlik ve Çocuk Bayramı tatili nedeniyle o haftaki dersler telafi programına alınacaktır. Telafi saatleri duyurulacaktır.",
+    "date": "2025-03-15",
+    "relatedCourse": null,
+    "important": false
+  },
+  {
+    "id": "ann-008",
+    "title": "Yayın: IEEE İşlem Dergisinde Makale Kabul Edildi",
+    "content": "Güç Elektroniği alanındaki araştırma çalışmamız IEEE Transactions on Power Electronics dergisinde yayımlanmak üzere kabul edilmiştir. Yayın bilgilerine Yayınlar sayfasından ulaşabilirsiniz.",
+    "date": "2025-04-01",
+    "relatedCourse": null,
+    "important": false
+  }
+]

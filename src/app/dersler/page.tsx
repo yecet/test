@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { courses } from "@/data/courses";
+import { getCourses } from "@/lib/content";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Dersler",
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function DerslerPage() {
+  const courses = getCourses();
   const activeCourses = courses.filter((c) => c.active);
 
   return (

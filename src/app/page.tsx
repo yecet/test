@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { profile } from "@/data/profile";
-import { courses } from "@/data/courses";
-import { announcements } from "@/data/announcements";
-import { publications } from "@/data/publications";
+import { getProfile, getCourses, getAnnouncements, getPublications } from "@/lib/content";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Oğuzhan Kapukaya | Araştırma Görevlisi – İTÜ EEF",
@@ -11,11 +10,16 @@ export const metadata: Metadata = {
     "İstanbul Teknik Üniversitesi Elektrik ve Elektronik Mühendisliği araştırma görevlisi Oğuzhan Kapukaya'nın akademik web sitesi.",
 };
 
-const recentAnnouncements = announcements.slice(0, 4);
-const recentPublications = publications.slice(0, 3);
-const activeCourses = courses.filter((c) => c.active).slice(0, 4);
-
 export default function HomePage() {
+  const profile = getProfile();
+  const courses = getCourses();
+  const announcements = getAnnouncements();
+  const publications = getPublications();
+
+  const recentAnnouncements = announcements.slice(0, 4);
+  const recentPublications = publications.slice(0, 3);
+  const activeCourses = courses.filter((c) => c.active).slice(0, 4);
+
   return (
     <>
       {/* ---- HERO ---- */}

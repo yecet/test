@@ -1,0 +1,167 @@
+[
+  {
+    "slug": "devre-analizi",
+    "code": "EEF 201",
+    "name": "Devre Analizi",
+    "description": "Elektrik devrelerinin temel kavramları, analiz yöntemleri ve uygulamaları. Kirchhoff yasaları, düğüm ve çevre analizleri, Thevenin-Norton teoremler, AC devre analizi.",
+    "credits": 4,
+    "semester": "Güz 2024–2025",
+    "level": "Lisans",
+    "prerequisites": ["FIZ 101 – Fizik I"],
+    "objectives": [
+      "Temel devre yasalarını ve teoremlerini kavramak",
+      "DC ve AC devreleri analiz edebilmek",
+      "Thevenin ve Norton teoremlerini uygulayabilmek",
+      "Geçici ve kararlı durum analizlerini yapabilmek"
+    ],
+    "weeklyPlan": [
+      { "week": 1, "topic": "Giriş: Temel Büyüklükler ve Birimler" },
+      { "week": 2, "topic": "Devre Elemanları: R, L, C" },
+      { "week": 3, "topic": "Kirchhoff Akım ve Gerilim Yasaları" },
+      { "week": 4, "topic": "Düğüm Analizi" },
+      { "week": 5, "topic": "Çevre (Mesh) Analizi" },
+      { "week": 6, "topic": "Süperpozisyon Teoremi" },
+      { "week": 7, "topic": "Thevenin ve Norton Teoremleri" },
+      { "week": 8, "topic": "Ara Sınav" },
+      { "week": 9, "topic": "AC Devre Analizi – Fazörler" },
+      { "week": 10, "topic": "Empedans ve Admitans" },
+      { "week": 11, "topic": "Güç Analizi" },
+      { "week": 12, "topic": "Rezonans Devreleri" },
+      { "week": 13, "topic": "İki Kapılı Devreler" },
+      { "week": 14, "topic": "Geçici Durum Analizi" }
+    ],
+    "active": true
+  },
+  {
+    "slug": "elektronik-devreler",
+    "code": "EEF 301",
+    "name": "Elektronik Devreler",
+    "description": "Diyot, BJT ve MOSFET karakteristikleri, yükselteç devreleri, geri besleme, frekans cevabı ve op-amp uygulamaları.",
+    "credits": 4,
+    "semester": "Güz 2024–2025",
+    "level": "Lisans",
+    "prerequisites": ["EEF 201 – Devre Analizi", "FIZ 102 – Fizik II"],
+    "objectives": [
+      "Diyot, BJT ve MOSFET modellerini anlamak ve uygulamak",
+      "Yükselteç devrelerini analiz edip tasarlayabilmek",
+      "Geri besleme kavramını kavramak",
+      "Op-amp tabanlı devreler tasarlayabilmek"
+    ],
+    "weeklyPlan": [
+      { "week": 1, "topic": "Yarı İletken Fiziğine Giriş" },
+      { "week": 2, "topic": "Diyot Modelleri ve Uygulamaları" },
+      { "week": 3, "topic": "Doğrultucu Devreler" },
+      { "week": 4, "topic": "BJT: Yapı ve Karakteristikler" },
+      { "week": 5, "topic": "BJT Yükselteç Devreleri" },
+      { "week": 6, "topic": "MOSFET: Yapı ve Karakteristikler" },
+      { "week": 7, "topic": "MOSFET Yükselteç Devreleri" },
+      { "week": 8, "topic": "Ara Sınav" },
+      { "week": 9, "topic": "Diferansiyel Yükselteçler" },
+      { "week": 10, "topic": "Frekans Cevabı" },
+      { "week": 11, "topic": "Geri Besleme" },
+      { "week": 12, "topic": "Op-Amp: İdeal Model ve Uygulamalar" },
+      { "week": 13, "topic": "Aktif Filtreler" },
+      { "week": 14, "topic": "Osilatörler ve Tetikleyiciler" }
+    ],
+    "active": true
+  },
+  {
+    "slug": "sinyaller-ve-sistemler",
+    "code": "EEF 302",
+    "name": "Sinyaller ve Sistemler",
+    "description": "Sürekli ve ayrık zamanlı sinyaller, LTI sistemler, Fourier analizi, Laplace dönüşümü ve Z dönüşümü.",
+    "credits": 3,
+    "semester": "Bahar 2024–2025",
+    "level": "Lisans",
+    "prerequisites": ["MAT 201 – Diferansiyel Denklemler"],
+    "objectives": [
+      "Sürekli ve ayrık zamanlı sinyalleri matematiksel olarak tanımlayabilmek",
+      "LTI sistem analizini yapabilmek",
+      "Fourier, Laplace ve Z dönüşümlerini uygulayabilmek",
+      "Filtre tasarımı temellerini kavramak"
+    ],
+    "weeklyPlan": [
+      { "week": 1, "topic": "Sinyallere Giriş: Temel Sinyaller" },
+      { "week": 2, "topic": "Sürekli Zamanlı Sistemler" },
+      { "week": 3, "topic": "Konvolüsyon" },
+      { "week": 4, "topic": "LTI Sistem Özellikleri" },
+      { "week": 5, "topic": "Fourier Serisi" },
+      { "week": 6, "topic": "Fourier Dönüşümü" },
+      { "week": 7, "topic": "Örnekleme Teoremi" },
+      { "week": 8, "topic": "Ara Sınav" },
+      { "week": 9, "topic": "Laplace Dönüşümü" },
+      { "week": 10, "topic": "Transfer Fonksiyonu" },
+      { "week": 11, "topic": "Ayrık Zamanlı Sinyaller ve Sistemler" },
+      { "week": 12, "topic": "Z Dönüşümü" },
+      { "week": 13, "topic": "Dijital Filtre Tasarımı" },
+      { "week": 14, "topic": "Uygulamalar ve Tekrar" }
+    ],
+    "active": true
+  },
+  {
+    "slug": "sayisal-tasarim",
+    "code": "EEF 211",
+    "name": "Sayısal Tasarım",
+    "description": "Sayı sistemleri, mantık kapıları, kombinasyonel ve sıralı devreler, VHDL/Verilog programlama ve FPGA uygulamaları.",
+    "credits": 4,
+    "semester": "Güz 2024–2025",
+    "level": "Lisans",
+    "prerequisites": [],
+    "objectives": [
+      "Sayı sistemleri ve Boolean cebiri hakkında temel kavramları öğrenmek",
+      "Kombinasyonel ve sıralı devreleri tasarlayabilmek",
+      "VHDL veya Verilog ile donanım tanımlama yapabilmek",
+      "FPGA platformunda devre gerçekleştirimi yapabilmek"
+    ],
+    "weeklyPlan": [
+      { "week": 1, "topic": "Sayı Sistemleri ve Boolean Cebiri" },
+      { "week": 2, "topic": "Mantık Kapıları ve Lojik Fonksiyonlar" },
+      { "week": 3, "topic": "Karnaugh Haritası ile Basitleştirme" },
+      { "week": 4, "topic": "Kombinasyonel Devre Tasarımı" },
+      { "week": 5, "topic": "Çoklayıcı, Kodlayıcı, Toplayıcı" },
+      { "week": 6, "topic": "Flip-Floplar" },
+      { "week": 7, "topic": "Kaydediciler ve Sayıcılar" },
+      { "week": 8, "topic": "Ara Sınav" },
+      { "week": 9, "topic": "Sonlu Durum Makineleri" },
+      { "week": 10, "topic": "VHDL'e Giriş" },
+      { "week": 11, "topic": "VHDL ile Kombinasyonel Devreler" },
+      { "week": 12, "topic": "VHDL ile Sıralı Devreler" },
+      { "week": 13, "topic": "FPGA Mimarisi ve Araçları" },
+      { "week": 14, "topic": "Proje Sunumları" }
+    ],
+    "active": true
+  },
+  {
+    "slug": "mikrodenetleyiciler",
+    "code": "EEF 401",
+    "name": "Mikrodenetleyiciler",
+    "description": "Mikrodenetleyici mimarisi, giriş/çıkış birimleri, kesme mekanizmaları, haberleşme protokolleri (UART, SPI, I2C) ve gerçek zamanlı uygulama geliştirme.",
+    "credits": 4,
+    "semester": "Bahar 2024–2025",
+    "level": "Lisans",
+    "prerequisites": ["EEF 211 – Sayısal Tasarım", "BIL 101 – Programlamaya Giriş"],
+    "objectives": [
+      "ARM tabanlı mikrodenetleyici mimarisini anlamak",
+      "GPIO, timer, ADC, DAC birimlerini programlayabilmek",
+      "UART, SPI ve I2C protokollerini uygulamak",
+      "Gerçek zamanlı gömülü sistem uygulamaları geliştirebilmek"
+    ],
+    "weeklyPlan": [
+      { "week": 1, "topic": "Mikrodenetleyici Mimarisine Giriş" },
+      { "week": 2, "topic": "STM32 Geliştirme Ortamı Kurulumu" },
+      { "week": 3, "topic": "GPIO: Dijital Giriş/Çıkış" },
+      { "week": 4, "topic": "Kesme Yönetimi (NVIC)" },
+      { "week": 5, "topic": "Timer ve PWM Üretimi" },
+      { "week": 6, "topic": "ADC: Analog-Dijital Dönüştürücü" },
+      { "week": 7, "topic": "DAC ve Sinyal Üretimi" },
+      { "week": 8, "topic": "Ara Sınav" },
+      { "week": 9, "topic": "UART Haberleşmesi" },
+      { "week": 10, "topic": "SPI Protokolü" },
+      { "week": 11, "topic": "I2C Protokolü" },
+      { "week": 12, "topic": "DMA ile Veri Transferi" },
+      { "week": 13, "topic": "RTOS Temelleri" },
+      { "week": 14, "topic": "Proje Sunumları" }
+    ],
+    "active": true
+  }
+]

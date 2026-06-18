@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { profile } from "@/data/profile";
+import { getProfile } from "@/lib/content";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Hakkımda",
@@ -9,6 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default function HakkimdaPage() {
+  const profile = getProfile();
+
   return (
     <>
       {/* Page Header */}

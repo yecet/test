@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { courses } from "@/data/courses";
-import { materials } from "@/data/materials";
+import { getCourses, getMaterials } from "@/lib/content";
+
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
+  const courses = getCourses();
   return courses.map((c) => ({ slug: c.slug }));
 }
 
@@ -14,6 +16,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const courses = getCourses();
   const course = courses.find((c) => c.slug === slug);
   if (!course) return { title: "Ders Bulunamadı" };
   return {
@@ -28,6 +31,8 @@ export default async function CourseDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const courses = getCourses();
+  const materials = getMaterials();
   const course = courses.find((c) => c.slug === slug);
 
   if (!course) notFound();

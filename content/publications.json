@@ -1,0 +1,135 @@
+[
+  {
+    "id": "pub-001",
+    "title": "FPGA-Based Real-Time Power Quality Monitoring System Using Discrete Wavelet Transform",
+    "authors": ["O. Kapukaya", "A. Yılmaz", "M. Çelik"],
+    "venue": "IEEE Transactions on Power Electronics",
+    "year": 2025,
+    "type": "journal",
+    "doi": "10.1109/TPEL.2025.000001",
+    "url": "https://ieeexplore.ieee.org",
+    "keywords": ["FPGA", "güç kalitesi", "dalgacık dönüşümü", "gerçek zamanlı"],
+    "abstract": "Bu çalışmada, kesintisiz güç kaynaklarındaki harmonik bozunumun gerçek zamanlı tespiti için FPGA tabanlı bir sistem önerilmektedir."
+  },
+  {
+    "id": "pub-002",
+    "title": "STM32-Based Adaptive PID Controller Design for DC-DC Buck Converters",
+    "authors": ["O. Kapukaya", "S. Demir"],
+    "venue": "IEEE Transactions on Industrial Electronics",
+    "year": 2024,
+    "type": "journal",
+    "doi": "10.1109/TIE.2024.000123",
+    "url": "https://ieeexplore.ieee.org",
+    "keywords": ["STM32", "PID kontrol", "buck dönüştürücü", "uyumlu kontrol"],
+    "abstract": "DC-DC dönüştürücüler için STM32 mikrodenetleyici tabanlı uyarlamalı PID kontrolcü tasarımı ve gerçekleştirimi."
+  },
+  {
+    "id": "pub-003",
+    "title": "A Novel Harmonic Reduction Technique for Three-Phase Inverters Using Selective Harmonic Elimination PWM",
+    "authors": ["O. Kapukaya", "H. Arslan", "N. Karadağ"],
+    "venue": "IEEE International Conference on Power Electronics and Drive Systems (PEDS)",
+    "year": 2024,
+    "type": "conference",
+    "doi": "10.1109/PEDS2024.000456",
+    "url": "https://ieeexplore.ieee.org",
+    "keywords": ["harmonik eliminasyon", "PWM", "evirici", "güç elektroniği"]
+  },
+  {
+    "id": "pub-004",
+    "title": "Deep Learning-Based Fault Detection in Induction Motors Using Vibration Signals",
+    "authors": ["O. Kapukaya", "E. Sarı", "C. Öztürk"],
+    "venue": "Measurement: Journal of the International Measurement Confederation",
+    "year": 2024,
+    "type": "journal",
+    "doi": "10.1016/j.measurement.2024.114567",
+    "url": "https://www.sciencedirect.com",
+    "keywords": ["derin öğrenme", "hata tespiti", "asenkron motor", "titreşim"]
+  },
+  {
+    "id": "pub-005",
+    "title": "Embedded Systems Laboratory Curriculum Design for Electrical Engineering Students",
+    "authors": ["O. Kapukaya", "B. Koç"],
+    "venue": "IEEE Frontiers in Education Conference (FIE)",
+    "year": 2023,
+    "type": "conference",
+    "doi": "10.1109/FIE2023.000789",
+    "url": "https://ieeexplore.ieee.org",
+    "keywords": ["gömülü sistemler", "müfredat tasarımı", "mühendislik eğitimi"]
+  },
+  {
+    "id": "pub-006",
+    "title": "Modeling and Simulation of Grid-Connected Photovoltaic Systems with MPPT Algorithms",
+    "authors": ["O. Kapukaya", "T. Güven", "A. Şahin"],
+    "venue": "Solar Energy",
+    "year": 2023,
+    "type": "journal",
+    "doi": "10.1016/j.solener.2023.112345",
+    "url": "https://www.sciencedirect.com",
+    "keywords": ["fotovoltaik", "MPPT", "şebeke bağlantılı", "simülasyon"]
+  },
+  {
+    "id": "pub-007",
+    "title": "Real-Time Signal Processing on ARM Cortex-M: Performance Analysis and Optimization",
+    "authors": ["O. Kapukaya"],
+    "venue": "International Symposium on Electrical and Electronics Engineering (ISEEE)",
+    "year": 2023,
+    "type": "conference",
+    "doi": "10.1109/ISEEE2023.000321",
+    "url": "https://ieeexplore.ieee.org",
+    "keywords": ["ARM Cortex-M", "gerçek zamanlı", "sinyal işleme", "optimizasyon"]
+  },
+  {
+    "id": "pub-008",
+    "title": "VHDL Implementation of Fast Fourier Transform for Embedded Spectrum Analysis",
+    "authors": ["O. Kapukaya", "K. Yıldız"],
+    "venue": "IET Circuits, Devices & Systems",
+    "year": 2022,
+    "type": "journal",
+    "doi": "10.1049/cds2.12345",
+    "url": "https://ietresearch.onlinelibrary.wiley.com",
+    "keywords": ["VHDL", "FFT", "FPGA", "spektrum analizi"]
+  },
+  {
+    "id": "pub-009",
+    "title": "Digital Control of Power Factor Correction Converters Using DSP",
+    "authors": ["O. Kapukaya", "M. Demirtaş"],
+    "venue": "IEEE Applied Power Electronics Conference (APEC)",
+    "year": 2022,
+    "type": "conference",
+    "doi": "10.1109/APEC2022.000654",
+    "url": "https://ieeexplore.ieee.org",
+    "keywords": ["güç faktörü düzeltme", "DSP", "dijital kontrol"]
+  },
+  {
+    "id": "pub-010",
+    "title": "Survey of Machine Learning Techniques for Power System Fault Classification",
+    "authors": ["O. Kapukaya", "R. Aydın", "F. Çetin"],
+    "venue": "Energies (MDPI)",
+    "year": 2022,
+    "type": "journal",
+    "doi": "10.3390/en15010123",
+    "url": "https://www.mdpi.com",
+    "keywords": ["makine öğrenmesi", "güç sistemi", "hata sınıflandırma"]
+  },
+  {
+    "id": "pub-011",
+    "title": "FPGA-Based Real-Time Control of Interleaved Boost Converter for EV Charging",
+    "authors": ["O. Kapukaya"],
+    "venue": "Yüksek Lisans Tezi, İstanbul Teknik Üniversitesi",
+    "year": 2020,
+    "type": "thesis",
+    "keywords": ["FPGA", "interleaved boost", "EV şarjı", "gerçek zamanlı kontrol"],
+    "abstract": "Elektrikli araç şarj istasyonları için yüksek verimli interleaved boost dönüştürücü tasarımı ve FPGA tabanlı gerçek zamanlı kontrolü."
+  },
+  {
+    "id": "pub-012",
+    "title": "Comparison of PWM Techniques for Three-Phase Voltage Source Inverters",
+    "authors": ["O. Kapukaya", "H. Arslan"],
+    "venue": "International Conference on Electrical and Electronics Engineering (ELECO)",
+    "year": 2019,
+    "type": "conference",
+    "doi": "10.23919/ELECO47770.2019.000111",
+    "url": "https://ieeexplore.ieee.org",
+    "keywords": ["PWM", "evirici", "gerilim kaynağı", "karşılaştırma"]
+  }
+]
