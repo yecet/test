@@ -17,7 +17,7 @@ import {
   useToast,
   EmptyState,
 } from "@/components/admin/AdminUI";
-import type { Course } from "@/lib/types";
+import type { Course, WeeklyPlanItem } from "@/lib/types";
 
 function slugify(text: string): string {
   return text
@@ -88,6 +88,11 @@ export default function CoursesAdmin() {
       finalCourse.slug = slugify(finalCourse.name);
     }
 
+    // Sort weeklyPlan by week number before saving
+    if (finalCourse.weeklyPlan) {
+      finalCourse.weeklyPlan = [...finalCourse.weeklyPlan].sort((a, b) => a.week - b.week);
+    }
+
     let newData: Course[];
     const isExisting = courses.some((c) => c.slug === finalCourse.slug);
 
@@ -113,6 +118,30 @@ export default function CoursesAdmin() {
     setEditingCourse({ ...editingCourse, [field]: value });
   };
 
+  // ---- Weekly Plan Helpers ----
+  const handleAddWeek = () => {
+    if (!editingCourse) return;
+    const plan = editingCourse.weeklyPlan || [];
+    handleFieldChange("weeklyPlan", [
+      ...plan,
+      { week: plan.length + 1, topic: "" }
+    ]);
+  };
+
+  const handleWeekChange = (index: number, key: keyof WeeklyPlanItem, value: any) => {
+    if (!editingCourse) return;
+    const plan = editingCourse.weeklyPlan.map((item, idx) => 
+      idx === index ? { ...item, [key]: value } : item
+    );
+    handleFieldChange("weeklyPlan", plan);
+  };
+
+  const handleRemoveWeek = (index: number) => {
+    if (!editingCourse) return;
+    const plan = editingCourse.weeklyPlan.filter((_, idx) => idx !== index);
+    handleFieldChange("weeklyPlan", plan);
+  };
+
   // ---- Views ----
   if (view === "form" && editingCourse) {
     return (
@@ -127,74 +156,123 @@ export default function CoursesAdmin() {
           </div>
         </div>
 
-        <AdminCard>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
-            <TextField
-              label="Ders Adı"
-              value={editingCourse.name}
-              onChange={(v) => handleFieldChange("name", v)}
-              required
-            />
-            <TextField
-              label="Ders Kodu"
-              value={editingCourse.code}
-              onChange={(v) => handleFieldChange("code", v)}
-              required
-            />
-            <SelectField
-              label="Seviye"
-              value={editingCourse.level}
-              onChange={(v) => handleFieldChange("level", v)}
-              options={[
-                { value: "Lisans", label: "Lisans" },
-                { value: "Yüksek Lisans", label: "Yüksek Lisans" },
-              ]}
-              required
-            />
-            <TextField
-              label="Dönem (örn. Güz 2024)"
-              value={editingCourse.semester}
-              onChange={(v) => handleFieldChange("semester", v)}
-              required
-            />
-            <NumberField
-              label="Kredi"
-              value={editingCourse.credits}
-              onChange={(v) => handleFieldChange("credits", v)}
-              required
-            />
-          </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+          <AdminCard title="Ders Temel Bilgileri">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
+              <TextField
+                label="Ders Adı"
+                value={editingCourse.name}
+                onChange={(v) => handleFieldChange("name", v)}
+                required
+              />
+              <TextField
+                label="Ders Kodu"
+                value={editingCourse.code}
+                onChange={(v) => handleFieldChange("code", v)}
+                required
+              />
+              <SelectField
+                label="Seviye"
+                value={editingCourse.level}
+                onChange={(v) => handleFieldChange("level", v)}
+                options={[
+                  { value: "Lisans", label: "Lisans" },
+                  { value: "Yüksek Lisans", label: "Yüksek Lisans" },
+                ]}
+                required
+              />
+              <TextField
+                label="Dönem (örn. Güz 2024)"
+                value={editingCourse.semester}
+                onChange={(v) => handleFieldChange("semester", v)}
+                required
+              />
+              <NumberField
+                label="Kredi"
+                value={editingCourse.credits}
+                onChange={(v) => handleFieldChange("credits", v)}
+                required
+              />
+            </div>
 
-          <TextArea
-            label="Ders Açıklaması"
-            value={editingCourse.description}
-            onChange={(v) => handleFieldChange("description", v)}
-            rows={3}
-            required
-          />
-
-          <TextArea
-            label="Ön Koşullar (Virgülle ayırın)"
-            value={editingCourse.prerequisites.join(", ")}
-            onChange={(v) => handleFieldChange("prerequisites", v.split(",").map(s => s.trim()).filter(Boolean))}
-            rows={2}
-          />
-
-          <TextArea
-            label="Öğrenme Hedefleri (Her satıra bir hedef)"
-            value={editingCourse.objectives.join("\n")}
-            onChange={(v) => handleFieldChange("objectives", v.split("\n").map(s => s.trim()).filter(Boolean))}
-            rows={4}
-          />
-
-          <div style={{ marginTop: "16px", padding: "16px", background: "rgba(0,0,0,0.2)", borderRadius: "8px" }}>
-            <CheckboxField
-              label="Ders Aktif (Sitede Gösterilsin mi?)"
-              checked={editingCourse.active}
-              onChange={(v) => handleFieldChange("active", v)}
+            <TextArea
+              label="Ders Açıklaması"
+              value={editingCourse.description}
+              onChange={(v) => handleFieldChange("description", v)}
+              rows={3}
+              required
             />
-          </div>
-        </AdminCard>
+
+            <TextArea
+              label="Ön Koşullar (Virgülle ayırın)"
+              value={editingCourse.prerequisites.join(", ")}
+              onChange={(v) => handleFieldChange("prerequisites", v.split(",").map(s => s.trim()).filter(Boolean))}
+              rows={2}
+            />
+
+            <TextArea
+              label="Öğrenme Hedefleri (Her satıra bir hedef)"
+              value={editingCourse.objectives.join("\n")}
+              onChange={(v) => handleFieldChange("objectives", v.split("\n").map(s => s.trim()).filter(Boolean))}
+              rows={4}
+            />
+
+            <div style={{ marginTop: "16px", padding: "16px", background: "rgba(0,0,0,0.2)", borderRadius: "8px" }}>
+              <CheckboxField
+                label="Ders Aktif (Sitede Gösterilsin mi?)"
+                checked={editingCourse.active}
+                onChange={(v) => handleFieldChange("active", v)}
+              />
+            </div>
+          </AdminCard>
+
+          {/* Haftalık Ders Planı Formu */}
+          <AdminCard title="Haftalık Ders Planı">
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              {(editingCourse.weeklyPlan || []).map((item, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    display: "flex",
+                    gap: "12px",
+                    alignItems: "center",
+                    padding: "12px",
+                    background: "rgba(15,23,42,0.4)",
+                    borderRadius: "8px",
+                    border: "1px solid rgba(148,163,184,0.1)",
+                  }}
+                >
+                  <div style={{ width: "90px" }}>
+                    <NumberField
+                      label="Hafta"
+                      value={item.week}
+                      onChange={(v) => handleWeekChange(idx, "week", Number(v))}
+                      min={1}
+                      max={20}
+                      required
+                    />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <TextField
+                      label="Konu / Başlık"
+                      value={item.topic}
+                      onChange={(v) => handleWeekChange(idx, "topic", v)}
+                      required
+                    />
+                  </div>
+                  <div style={{ marginTop: "8px" }}>
+                    <DangerButton onClick={() => handleRemoveWeek(idx)}>
+                      🗑 Sil
+                    </DangerButton>
+                  </div>
+                </div>
+              ))}
+              <SecondaryButton onClick={handleAddWeek}>
+                ➕ Yeni Hafta Ekle
+              </SecondaryButton>
+            </div>
+          </AdminCard>
+        </div>
       </div>
     );
   }
@@ -256,3 +334,4 @@ export default function CoursesAdmin() {
     </>
   );
 }
+

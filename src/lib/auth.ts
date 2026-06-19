@@ -1,8 +1,10 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
-const secretKey = process.env.JWT_SECRET || "fallback-dev-secret-change-me";
-const encodedKey = new TextEncoder().encode(secretKey);
+function getEncodedKey() {
+  const secretKey = process.env.JWT_SECRET || "fallback-dev-secret-change-me-1234567890-secure-key";
+  return new TextEncoder().encode(secretKey);
+}
 
 const COOKIE_NAME = "admin_session";
 
@@ -11,18 +13,19 @@ export async function signToken(payload: { username: string }): Promise<string> 
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("24h")
-    .sign(encodedKey);
+    .sign(getEncodedKey());
 }
 
 export async function verifyToken(
   token: string
 ): Promise<{ username: string } | null> {
   try {
-    const { payload } = await jwtVerify(token, encodedKey, {
+    const { payload } = await jwtVerify(token, getEncodedKey(), {
       algorithms: ["HS256"],
     });
     return payload as { username: string };
-  } catch {
+  } catch (err) {
+    console.error("JWT doğrulama hatası:", err);
     return null;
   }
 }

@@ -1,4 +1,5 @@
 import { getFileContent, updateFile } from "@/lib/github";
+import { getSession } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,14 @@ export async function GET(
   _request: Request,
   { params }: { params: Promise<{ type: string }> }
 ) {
+  const session = await getSession();
+  if (!session) {
+    return Response.json(
+      { error: "Yetkilendirme gerekli veya oturum süresi dolmuş" },
+      { status: 401 }
+    );
+  }
+
   const { type } = await params;
 
   if (!VALID_TYPES.includes(type)) {
@@ -42,6 +51,14 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ type: string }> }
 ) {
+  const session = await getSession();
+  if (!session) {
+    return Response.json(
+      { error: "Yetkilendirme gerekli veya oturum süresi dolmuş" },
+      { status: 401 }
+    );
+  }
+
   const { type } = await params;
 
   if (!VALID_TYPES.includes(type)) {
@@ -89,3 +106,4 @@ export async function PUT(
     );
   }
 }
+

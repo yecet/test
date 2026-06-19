@@ -1,12 +1,55 @@
-import { getCourses, getMaterials, getAnnouncements, getPublications } from "@/lib/content";
-import { AdminCard, StatCard } from "@/components/admin/AdminUI";
+"use client";
+
+import { useEffect, useState } from "react";
+import { AdminCard, StatCard, LoadingScreen } from "@/components/admin/AdminUI";
+import type { Course, Material, Announcement, Publication } from "@/lib/types";
 import Link from "next/link";
 
 export default function AdminDashboard() {
-  const courses = getCourses();
-  const materials = getMaterials();
-  const announcements = getAnnouncements();
-  const publications = getPublications();
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [materials, setMaterials] = useState<Material[]>([]);
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const [publications, setPublications] = useState<Publication[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadDashboardData() {
+      try {
+        const [cRes, mRes, aRes, pRes] = await Promise.all([
+          fetch("/api/admin/content/courses"),
+          fetch("/api/admin/content/materials"),
+          fetch("/api/admin/content/announcements"),
+          fetch("/api/admin/content/publications"),
+        ]);
+
+        if (cRes.status === 401 || mRes.status === 401) {
+          window.location.href = "/admin/login";
+          return;
+        }
+
+        const [cJson, mJson, aJson, pJson] = await Promise.all([
+          cRes.json(),
+          mRes.json(),
+          aRes.json(),
+          pRes.json(),
+        ]);
+
+        setCourses(cJson.data || []);
+        setMaterials(mJson.data || []);
+        setAnnouncements(aJson.data || []);
+        setPublications(pJson.data || []);
+      } catch (err) {
+        console.error("Dashboard veri yükleme hatası:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadDashboardData();
+  }, []);
+
+  if (loading) {
+    return <LoadingScreen text="Dashboard verileri yükleniyor..." />;
+  }
 
   const recentMaterials = [...materials].sort((a, b) => 
     new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
@@ -158,3 +201,4 @@ export default function AdminDashboard() {
     </div>
   );
 }
+

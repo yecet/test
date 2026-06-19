@@ -1,4 +1,5 @@
 import { uploadBinaryFile, getFileContent, updateFile } from "@/lib/github";
+import { getSession } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -30,7 +31,16 @@ function slugify(text: string): string {
 
 export async function POST(request: Request) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return Response.json(
+        { error: "Yetkilendirme gerekli veya oturum süresi dolmuş" },
+        { status: 401 }
+      );
+    }
+
     const formData = await request.formData();
+
     const file = formData.get("file") as File | null;
     const targetPath = formData.get("targetPath") as string | null;
     const commitMessage = formData.get("commitMessage") as string | null;
@@ -78,11 +88,26 @@ export async function POST(request: Request) {
       originalName.lastIndexOf(".")
     );
     const safeName = slugify(nameWithoutExt);
-    const timestamp = Date.now();
-    const fileName = `${safeName}-${timestamp}${ext}`;
+    const defaultFileName = `${safeName}${ext}`;
+    const defaultFullPath = `${targetPath}/${defaultFileName}`.replace(/\/+/g, "/");
 
-    // Build full path
-    const fullPath = `${targetPath}/${fileName}`.replace(/\/+/g, "/");
+    let finalFileName = defaultFileName;
+    let finalFullPath = defaultFullPath;
+
+    // Check if file exists in GitHub repository
+    let fileExists = false;
+    try {
+      await getFileContent(defaultFullPath);
+      fileExists = true;
+    } catch {
+      // File does not exist, which is fine
+    }
+
+    if (fileExists) {
+      const timestamp = Date.now();
+      finalFileName = `${safeName}-${timestamp}${ext}`;
+      finalFullPath = `${targetPath}/${finalFileName}`.replace(/\/+/g, "/");
+    }
 
     // Convert to base64
     const arrayBuffer = await file.arrayBuffer();
@@ -90,10 +115,10 @@ export async function POST(request: Request) {
 
     // Upload to GitHub
     const message = commitMessage || `Dosya eklendi: ${originalName}`;
-    await uploadBinaryFile(fullPath, base64, message);
+    await uploadBinaryFile(finalFullPath, base64, message);
 
     // Return the public URL
-    const publicUrl = `/${fullPath.replace(/^public\//, "")}`;
+    const publicUrl = `/${finalFullPath.replace(/^public\//, "")}`;
 
     // Auto-update materials.json if materialMeta is provided
     if (materialMeta) {
@@ -103,6 +128,7 @@ export async function POST(request: Request) {
         const materials = JSON.parse(rawContent);
 
         const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
+        const timestamp = Date.now();
         const newMaterial = {
           id: `mat-${timestamp}`,
           courseSlug: meta.courseSlug || "",
@@ -131,8 +157,8 @@ export async function POST(request: Request) {
     return Response.json({
       success: true,
       message: `Dosya başarıyla yüklendi ve GitHub'a kaydedildi.`,
-      fileName,
-      filePath: fullPath,
+      fileName: finalFileName,
+      filePath: finalFullPath,
       publicUrl,
     });
   } catch (error) {

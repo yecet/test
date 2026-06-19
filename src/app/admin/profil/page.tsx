@@ -6,11 +6,14 @@ import {
   TextField,
   TextArea,
   PrimaryButton,
+  DangerButton,
+  SecondaryButton,
+  NumberField,
   LoadingScreen,
   useAdminData,
   useToast,
 } from "@/components/admin/AdminUI";
-import type { Profile } from "@/lib/types";
+import type { Profile, Education, Language } from "@/lib/types";
 
 export default function ProfileAdmin() {
   const { data: profile, loading, saving, save, setData } = useAdminData<Profile>("profile");
@@ -30,9 +33,58 @@ export default function ProfileAdmin() {
     });
   };
 
+  const handleStatChange = (field: keyof Profile["stats"], value: number) => {
+    setData((prev) => {
+      if (!prev) return prev;
+      return { ...prev, stats: { ...prev.stats, [field]: value } };
+    });
+  };
+
   const handleSkillsChange = (value: string) => {
     const skills = value.split(",").map((s) => s.trim()).filter(Boolean);
     handleChange("skills", skills);
+  };
+
+  // ---- Education Helpers ----
+  const handleAddEducation = () => {
+    const education = profile.education || [];
+    handleChange("education", [
+      ...education,
+      { degree: "", field: "", university: "", year: "" }
+    ]);
+  };
+
+  const handleEducationChange = (index: number, key: keyof Education, value: string) => {
+    const updated = profile.education.map((edu, idx) => 
+      idx === index ? { ...edu, [key]: value } : edu
+    );
+    handleChange("education", updated);
+  };
+
+  const handleRemoveEducation = (index: number) => {
+    const updated = profile.education.filter((_, idx) => idx !== index);
+    handleChange("education", updated);
+  };
+
+  // ---- Language Helpers ----
+  const handleAddLanguage = () => {
+    const languages = profile.languages || [];
+    handleChange("languages", [
+      ...languages,
+      { name: "", level: "" }
+    ]);
+  };
+
+  const handleLanguageChange = (index: number, key: keyof Language, value: string) => {
+    const updated = profile.languages.map((lang, idx) => 
+      idx === index ? { ...lang, [key]: value } : lang
+    );
+    handleChange("languages", updated);
+  };
+
+  const handleRemoveLanguage = (index: number) => {
+    const updated = profile.languages.filter((_, idx) => idx !== index);
+    handleChange("languages", updated);
   };
 
   const handleSave = () => {
@@ -64,8 +116,6 @@ export default function ProfileAdmin() {
       if (!res.ok) throw new Error(json.error);
 
       toast("success", `Fotoğraf başarıyla yüklendi: ${json.publicUrl}`);
-      // Note: we might want to save this URL to profile.json if it had a photoUrl field.
-      // Currently Profile type in types.ts doesn't have a photoUrl. We just upload it.
     } catch (err) {
       toast("error", err instanceof Error ? err.message : "Yükleme hatası");
     } finally {
@@ -121,6 +171,140 @@ export default function ProfileAdmin() {
             onChange={(v) => handleChange("bio", v)}
             rows={5}
           />
+        </AdminCard>
+
+        {/* İstatistikler */}
+        <AdminCard title="İstatistikler">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
+            <NumberField
+              label="Yayın Sayısı"
+              value={profile.stats.publications}
+              onChange={(v) => handleStatChange("publications", Number(v))}
+              required
+            />
+            <NumberField
+              label="Ders Sayısı"
+              value={profile.stats.courses}
+              onChange={(v) => handleStatChange("courses", Number(v))}
+              required
+            />
+            <NumberField
+              label="Öğrenci Sayısı"
+              value={profile.stats.students}
+              onChange={(v) => handleStatChange("students", Number(v))}
+              required
+            />
+            <NumberField
+              label="Yıl Deneyimi"
+              value={profile.stats.yearsExperience}
+              onChange={(v) => handleStatChange("yearsExperience", Number(v))}
+              required
+            />
+          </div>
+        </AdminCard>
+
+        {/* Eğitim Geçmişi */}
+        <AdminCard title="Eğitim Bilgileri">
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            {(profile.education || []).map((edu, idx) => (
+              <div
+                key={idx}
+                style={{
+                  padding: "16px",
+                  background: "rgba(15,23,42,0.4)",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(148,163,184,0.1)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ color: "#93c5fd", fontWeight: 600, fontSize: "0.85rem" }}>
+                    Eğitim #{idx + 1}
+                  </span>
+                  <DangerButton onClick={() => handleRemoveEducation(idx)}>
+                    🗑 Sil
+                  </DangerButton>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
+                  <TextField
+                    label="Derece / Unvan (Örn: Lisans, Doktora)"
+                    value={edu.degree}
+                    onChange={(v) => handleEducationChange(idx, "degree", v)}
+                    required
+                  />
+                  <TextField
+                    label="Bölüm / Alan"
+                    value={edu.field}
+                    onChange={(v) => handleEducationChange(idx, "field", v)}
+                    required
+                  />
+                  <TextField
+                    label="Üniversite"
+                    value={edu.university}
+                    onChange={(v) => handleEducationChange(idx, "university", v)}
+                    required
+                  />
+                  <TextField
+                    label="Yıl Aralığı (Örn: 2014 - 2018)"
+                    value={edu.year}
+                    onChange={(v) => handleEducationChange(idx, "year", v)}
+                    required
+                  />
+                </div>
+              </div>
+            ))}
+            <SecondaryButton onClick={handleAddEducation}>
+              ➕ Yeni Eğitim Ekle
+            </SecondaryButton>
+          </div>
+        </AdminCard>
+
+        {/* Yabancı Diller */}
+        <AdminCard title="Yabancı Diller">
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            {(profile.languages || []).map((lang, idx) => (
+              <div
+                key={idx}
+                style={{
+                  padding: "16px",
+                  background: "rgba(15,23,42,0.4)",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(148,163,184,0.1)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ color: "#93c5fd", fontWeight: 600, fontSize: "0.85rem" }}>
+                    Dil #{idx + 1}
+                  </span>
+                  <DangerButton onClick={() => handleRemoveLanguage(idx)}>
+                    🗑 Sil
+                  </DangerButton>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
+                  <TextField
+                    label="Dil Adı"
+                    value={lang.name}
+                    onChange={(v) => handleLanguageChange(idx, "name", v)}
+                    required
+                  />
+                  <TextField
+                    label="Seviye (Örn: Anadil, İleri (C1))"
+                    value={lang.level}
+                    onChange={(v) => handleLanguageChange(idx, "level", v)}
+                    required
+                  />
+                </div>
+              </div>
+            ))}
+            <SecondaryButton onClick={handleAddLanguage}>
+              ➕ Yeni Dil Ekle
+            </SecondaryButton>
+          </div>
         </AdminCard>
 
         {/* İletişim Bilgileri */}
@@ -228,3 +412,4 @@ export default function ProfileAdmin() {
     </div>
   );
 }
+
